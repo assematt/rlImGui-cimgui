@@ -65,6 +65,8 @@
 extern "C" {
 #endif
 
+typedef struct ImGuiContext ImGuiContext;
+
 // High level API. This API is designed in the style of raylib and meant to work with reaylib code.
 // It will manage it's own ImGui context and call common ImGui functions (like NewFrame and Render) for you
 // for a lower level API that matches the other ImGui platforms, please see imgui_impl_raylib.h
@@ -75,6 +77,19 @@ extern "C" {
 /// </summary>
 /// <param name="darkTheme">when true(default) the dark theme is used, when false the light theme is used</param>
 RLIMGUIAPI void rlImGuiSetup(bool darkTheme);
+
+/// <summary>
+/// All the ImGui state is stored in the ImGuiContext struct that is heap allocated inside rlImGuiBeginInitImGui
+/// </summary>
+/// <returns>Return the internal pointer for the ImGui clobal context </returns>
+RLIMGUIAPI ImGuiContext* rlImGuiGetContext(void);
+
+/// <summary>
+/// Overrides the internal ImGuiContext* pointer. This can be useful in hot-reloading situation where the heap allocated memory is
+/// still valid, but the internal DLL pointer is now nullptr
+/// </summary>
+/// <param name="imgui_context">Set the ImGuiContext used by rlImGui</param>
+RLIMGUIAPI void rlImGuiSetContext(ImGuiContext *imgui_context);
 
 /// <summary>
 /// Starts a new ImGui Frame
@@ -193,7 +208,7 @@ bool rlImGuiImageButton(const char* name, const Texture* image);
 /// <param name="image">The texture to draw</param>
 /// <param name="size">The size of the button</param>
 /// <returns>True if the button was clicked</returns>
-RLIMGUIAPI bool rlImGuiImageButtonSize(const char* name, const Texture* image, struct ImVec2 size);
+RLIMGUIAPI bool rlImGuiImageButtonSize(const char* name, const Texture* image, Vector2 size);
 
 #ifdef __cplusplus
 }

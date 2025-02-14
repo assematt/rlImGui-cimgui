@@ -41,14 +41,15 @@
 // - Introduction, links and more at the top of imgui.cpp
 
 #pragma once
-#include "imgui.h"      // IMGUI_IMPL_API
+
+#define CIMGUI_DEFINE_ENUMS_AND_STRUCTS
+#include "cimgui.h"
+
 #ifndef IMGUI_DISABLE
-
-IMGUI_IMPL_API bool ImGui_ImplRaylib_Init(void);
-IMGUI_IMPL_API void ImGui_ImplRaylib_BuildFontAtlas(void);
-IMGUI_IMPL_API void ImGui_ImplRaylib_Shutdown(void);
-IMGUI_IMPL_API void ImGui_ImplRaylib_NewFrame(void);
-IMGUI_IMPL_API void ImGui_ImplRaylib_RenderDrawData(ImDrawData* draw_data);
-IMGUI_IMPL_API bool ImGui_ImplRaylib_ProcessEvents(void);
-
+CIMGUI_API bool ImGui_ImplRaylib_Init(void);
+CIMGUI_API void ImGui_ImplRaylib_BuildFontAtlas(void);
+CIMGUI_API void ImGui_ImplRaylib_Shutdown(void);
+CIMGUI_API void ImGui_ImplRaylib_NewFrame(void);
+CIMGUI_API void ImGui_ImplRaylib_RenderDrawData(ImDrawData* draw_data);
+CIMGUI_API bool ImGui_ImplRaylib_ProcessEvents(void);
 #endif // #ifndef IMGUI_DISABLE
